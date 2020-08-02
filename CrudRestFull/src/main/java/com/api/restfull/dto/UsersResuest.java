@@ -1,10 +1,16 @@
 package com.api.restfull.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UsersResuest {
 	
+	@JsonProperty
 	private String fistname;
+	@JsonProperty
 	private String lastname;
+	@JsonProperty
 	private String username;
+	@JsonProperty
 	private String password;
 	
 	public String getFistname() {

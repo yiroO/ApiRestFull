@@ -52,14 +52,19 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void save(UsersResuest usersreq) {
-		
-
+		Users us = MHelpers.modelMapper().map(usersreq, Users.class);
+		this.userRepository.save(us);
 	}
 
 	@Override
-	public void saveAll(UsersDTO usersdto) {
-		// TODO Auto-generated method stub
-
+	public void saveAll(UsersResuest usersreq) {
+		List<Users> us = new ArrayList<Users>();
+		
+		for (Users users : us) {
+			Users usrs = MHelpers.modelMapper().map(users, Users.class);
+			us.add(usrs);
+		}
+		this.userRepository.saveAll(us);
 	}
 
 	@Override
