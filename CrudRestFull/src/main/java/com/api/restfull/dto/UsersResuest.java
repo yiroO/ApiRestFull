@@ -1,23 +1,28 @@
 package com.api.restfull.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.istack.NotNull;
 
 public class UsersResuest {
 	
-	@JsonProperty
-	private String fistname;
-	@JsonProperty
+	@NotNull
+	@JsonProperty("firstname")
+	private String firstname;
+	@NotNull
+	@JsonProperty("lastname")
 	private String lastname;
-	@JsonProperty
+	@NotNull
+	@JsonProperty("username")
 	private String username;
-	@JsonProperty
+	@NotNull
+	@JsonProperty("password")
 	private String password;
 	
-	public String getFistname() {
-		return fistname;
+	public String getFirstname() {
+		return firstname;
 	}
-	public void setFistname(String fistname) {
-		this.fistname = fistname;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 	public String getLastname() {
 		return lastname;

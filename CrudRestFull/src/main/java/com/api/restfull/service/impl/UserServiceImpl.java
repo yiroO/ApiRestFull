@@ -16,6 +16,7 @@ import com.api.restfull.dto.UsersResuest;
 import com.api.restfull.entity.Users;
 import com.api.restfull.repository.UserRepository;
 import com.api.restfull.service.UserService;
+import com.api.restfull.utils.BCrypt;
 import com.api.restfull.utils.MHelpers;
 
 @Service
@@ -53,28 +54,34 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void save(UsersResuest usersreq) {
 		Users us = MHelpers.modelMapper().map(usersreq, Users.class);
+		us.setPassword(BCrypt.hashpw(us.getPassword(), BCrypt.gensalt(4)));
+		this.userRepository.save(us);
+	}
+	
+	@Override
+	public void update(UsersResuest usersreq, Long id_user) {
+		Optional<Users> usrs = this.userRepository.findById(id_user);
+		Users us = usrs.get();
+		
+		if(usrs.isPresent()) {
+			us.setFirstname(usersreq.getFirstname());
+			us.setLastname(usersreq.getLastname());
+			us.setUsername(usersreq.getUsername());
+			if (us.getPassword() == null) {
+				us.setPassword(BCrypt.hashpw(us.getPassword(), BCrypt.gensalt(4)));
+			}
+		}
 		this.userRepository.save(us);
 	}
 
 	@Override
-	public void saveAll(UsersResuest usersreq) {
-		List<Users> us = new ArrayList<Users>();
-		
-		for (Users users : us) {
-			Users usrs = MHelpers.modelMapper().map(users, Users.class);
-			us.add(usrs);
-		}
-		this.userRepository.saveAll(us);
-	}
-
-	@Override
 	public void deleteById(Long id_user) {
-		// TODO Auto-generated method stub
-
+		this.userRepository.deleteById(id_user);
 	}
 
 	private UsersDTO convertToUsersDTO(final Users user) {
 		return MHelpers.modelMapper().map(user, UsersDTO.class);
 	}
+
 
 }
