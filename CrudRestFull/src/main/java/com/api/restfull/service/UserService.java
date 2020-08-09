@@ -12,9 +12,9 @@ public interface UserService {
 	
 	List<UsersDTO> findAll();
 	UsersDTO findByUsername(String username);
-	Optional<UsersDTO> findById(Long id_user);
+	//Optional<UsersDTO> findById(Long id_user);
 	void save(UsersResuest usersreq);
-	void update(UsersResuest usersreq, Long id_user);
+	void update(Long id_user, UsersResuest usersreq);
 	void deleteById(Long id_user);
 
 }

@@ -45,11 +45,7 @@ public class UserServiceImpl implements UserService {
 		return MHelpers.modelMapper().map(us.get(), UsersDTO.class);
 	}
 
-	@Override
-	public Optional<UsersDTO> findById(Long id_user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public void save(UsersResuest usersreq) {
@@ -59,7 +55,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public void update(UsersResuest usersreq, Long id_user) {
+	public void update(Long id_user, UsersResuest usersreq) {
 		Optional<Users> usrs = this.userRepository.findById(id_user);
 		Users us = usrs.get();
 		
